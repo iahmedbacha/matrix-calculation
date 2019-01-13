@@ -1,0 +1,57 @@
+plugins {
+    id 'jacoco'
+}
+
+group 'matrix'
+version '1.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8
+            }
+        }
+    }
+}
+
+task generateMatrixAPI (type: Copy) {
+    from ('build') {
+        include 'reports/tests/**'
+        into 'TestReports'
+    }
+    from ('build') {
+        include 'reports/jacoco/**', 'reports/pitest/**'
+        into 'TestQualityReports'
+    }
+    from ('build') {
+        include 'docs/**'
+        into 'Documentation'
+    }
+    from ('build') {
+        include 'libs/**'
+        into 'API'
+    }
+    into 'MatrixRelease/Matrix_v_'+version
+}
+
+uploadArchives {
+    repositories {
+        maven {
+            credentials {
+                username "myMavenRepo"
+                password "password"
+            }
+            url "https://mymavenrepo.com/repo/OqrYUi3x701ypWFIiOVu/"
+        }
+    }
+}
+
+generateMatrixAPI.dependsOn 'build'
+uploadArchives.dependsOn 'generateMatrixAPI'
