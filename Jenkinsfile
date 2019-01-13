@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'gradle generateMatrixAPI'
+        bat 'gradle generateMatrixAPI'
       }
     }
     stage('Mail Notification') {
