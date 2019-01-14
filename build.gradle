@@ -20,7 +20,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.8
+                minimum = 0.4
             }
         }
     }
@@ -58,5 +58,6 @@ uploadArchives {
     }
 }
 
+test.finalizedBy 'jacocoTestCoverageVerification'
 generateMatrixAPI.dependsOn 'build'
 uploadArchives.dependsOn 'generateMatrixAPI'
