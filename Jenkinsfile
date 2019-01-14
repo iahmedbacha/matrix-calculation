@@ -15,6 +15,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           steps {
+            sh 'sonar-qube'
             waitForQualityGate true
           }
         }
