@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'gradle generateMatrixAPI'
+        bat 'gradle generateMatrixAPI test'
       }
     }
     stage('Mail Notification') {
@@ -15,12 +15,13 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           steps {
+            bat 'sonar-scanner'
             waitForQualityGate true
           }
         }
         stage('Test Reporting') {
           steps {
-            sh 'gradle test'
+            jacoco()
           }
         }
       }
