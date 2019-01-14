@@ -15,7 +15,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           steps {
-            withSonarQubeEnv('Préparation') {
+            withSonarQubeEnv('Preparation') {
               bat 'sonar-scanner'
             }
 
