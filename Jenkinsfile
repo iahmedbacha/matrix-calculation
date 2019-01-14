@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test Reporting') {
           steps {
-            sh 'gradle test'
+            jacoco()
           }
         }
       }
