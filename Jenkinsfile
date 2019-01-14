@@ -19,6 +19,7 @@ pipeline {
               bat 'sonar-scanner'
             }
 
+            waitForQualityGate true
           }
         }
         stage('Test Reporting') {
